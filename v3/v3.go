@@ -26,6 +26,7 @@ type Client struct {
 	PaymentMethods PaymentMethodsService
 	Invoices       InvoicesService
 	Refunds        RefundsService
+	Receipts       ReceiptsService
 }
 
 type ClientConfig struct {
@@ -66,6 +67,7 @@ func New(shopID, secretKey string, config *ClientConfig) *Client {
 	c.PaymentMethods = &PaymentMethodsServiceImpl{client: c}
 	c.Invoices = &InvoicesServiceImpl{client: c}
 	c.Refunds = &RefundsServiceImpl{client: c}
+	c.Receipts = &ReceiptsServiceImpl{client: c}
 
 	return c
 }
