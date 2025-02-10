@@ -13,14 +13,19 @@ const (
 )
 
 type Client struct {
-	client    *resty.Client
+	client *resty.Client
+	// Client settings
+	testMode bool
+	retries  int
+	timeout  time.Duration
+	// Authorization credentials
 	shopID    string
 	secretKey string
-	testMode  bool
-	retries   int
-	timeout   time.Duration
 	// API
-	Payments PaymentsService
+	Payments       PaymentsService
+	PaymentMethods PaymentMethodsService
+	Invoices       InvoicesService
+	Refunds        RefundsService
 }
 
 type ClientConfig struct {
@@ -58,6 +63,9 @@ func New(shopID, secretKey string, config *ClientConfig) *Client {
 	}
 
 	c.Payments = &PaymentsServiceImpl{client: c}
+	c.PaymentMethods = &PaymentMethodsServiceImpl{client: c}
+	c.Invoices = &InvoicesServiceImpl{client: c}
+	c.Refunds = &RefundsServiceImpl{client: c}
 
 	return c
 }
