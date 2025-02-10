@@ -1,3 +1,7 @@
 package refunds
 
-type RefundsListResponse struct{}
+type RefundsListResponse struct {
+	Type       string
+	Items      []*RefundResponse
+	NextCursor *string
+}

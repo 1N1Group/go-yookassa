@@ -1,3 +1,7 @@
 package receipts
 
-type ReceiptsListResponse struct{}
+type ReceiptsListResponse struct {
+	Type       string
+	Items      []*ReceiptResponse
+	NextCursor *string
+}
