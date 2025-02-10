@@ -14,7 +14,7 @@ const (
 type ReceiptsService interface {
 	Create(req *receipts.CreateReceiptRequest) (*receipts.ReceiptResponse, error)
 	GetList(req *receipts.GetListReceiptRequest) (*receipts.ReceiptsListResponse, error)
-	Get(refundId string) (*receipts.ReceiptResponse, error)
+	Get(receptId string) (*receipts.ReceiptResponse, error)
 }
 
 type ReceiptsServiceImpl struct {
@@ -41,8 +41,8 @@ func (s *ReceiptsServiceImpl) GetList(req *receipts.GetListReceiptRequest) (*rec
 	return result.(*receipts.ReceiptsListResponse), nil
 }
 
-func (s *ReceiptsServiceImpl) Get(receiptId string) (*receipts.ReceiptResponse, error) {
-	url := fmt.Sprintf("%s/%s", baseReceiptsUrl, receiptId)
+func (s *ReceiptsServiceImpl) Get(receptId string) (*receipts.ReceiptResponse, error) {
+	url := fmt.Sprintf("%s/%s", baseReceiptsUrl, receptId)
 
 	result, err := s.client.request(resty.MethodGet, url, nil, nil)
 
